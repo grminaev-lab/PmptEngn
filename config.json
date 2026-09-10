@@ -2,30 +2,35 @@
     "agents": [
         {
             "name": "QwenCosm_Test (Qwen3.6-35B)",
-            "uri": "gpt://b1gqctppj2rg4l3sj9qt/qwen3.6-35b-a3b/latest",
-            "id": "fvtvgie080v55osonq1p"
+            "model_name": "qwen3.6-35b-a3b/latest",
+            "agent_id": "fvtvgie080v55osonq1p",
+            "vector_store_id": "fvtnqskf195himgtfia1"
         },
         {
             "name": "YandexGPTCosm_Test (YandexGPT 5.1 Pro)",
-            "uri": "gpt://b1gqctppj2rg4l3sj9qt/yandexgpt-5.1/latest",
-            "id": "fvtja9l5dsirreusm0p5"
+            "model_name": "yandexgpt-5.1/latest",
+            "agent_id": "fvtja9l5dsirreusm0p5",
+            "vector_store_id": "fvtnqskf195himgtfia1"
         },
         {
             "name": "AliceCosm_Test (Alice AI LLM)",
-            "uri": "gpt://b1gqctppj2rg4l3sj9qt/aliceai-llm/latest",
-            "id": "fvtja9l5dsirreusm0p5"
+            "model_name": "aliceai-llm/latest",
+            "agent_id": "fvtja9l5dsirreusm0p5",
+            "vector_store_id": "fvtnqskf195himgtfia1"
         },
         {
             "name": "DeepSeekCosm_Test (Deepseek 4 Flash)",
-            "uri": "gpt://b1gqctppj2rg4l3sj9qt/deepseek-v4-flash/latest",
-            "id": "fvttsftbncceco6d2v57"
+            "model_name": "deepseek-v4-flash/latest",
+            "agent_id": "fvttsftbncceco6d2v57",
+            "vector_store_id": "fvtnqskf195himgtfia1"
         }
     ],
     "defaults": {
         "temperature": 0.25,
         "maxTokens": 1259,
-        "systemPrompt": "Ты продавец косметики. Постарайся продать, что-нибудь из каталога. \nОтвет должен содержать : \n- приветствие\n- определение типа запроса (заказ, вопрос, жалоба)\n- автоматическое предложение решения\n- информацию о сроках ответа\nНе выдумывай ответ, проверь актуальную информацию.\nЕсли информации о товаре нет, сообщи об этом.",
+        "systemPrompt": "Ты продавец косметики. Постарайся продать, что-нибудь из каталога. Ответ должен содержать : \n- приветствие\n- определение типа запроса (заказ, вопрос, жалоба)\n- автоматическое предложение решения\n- информацию о сроках ответа\nНе выдумывай ответ, проверь актуальную информацию. Если информации о товаре нет, сообщи об этом.\n",
         "userQuery": "Мыло есть?"
     },
-    "timeout": 30
+    "timeout": 30,
+    "vector_store_id": "fvtnqskf195himgtfia1"
 }

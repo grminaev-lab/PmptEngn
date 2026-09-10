@@ -39,10 +39,11 @@ export class RequestsPage {
             this.tempInput.value = config.defaults.temperature;
             this.tempDisplay.textContent = config.defaults.temperature;
             this.maxTokens.value = config.defaults.maxTokens;
-            this.systemPrompt.value = config.defaults.systemPrompt;
-            this.userQuery.value = config.defaults.userQuery;
+            this.systemPrompt.value = config.defaults.systemPrompt || '';
+            this.userQuery.value = config.defaults.userQuery || '';
         } catch (err) {
             console.error('Ошибка загрузки конфигурации:', err);
+            alert('Ошибка загрузки конфигурации. Проверьте подключение к серверу.');
         }
     }
 
@@ -53,6 +54,7 @@ export class RequestsPage {
             this.tempInput.value = val;
             this.tempDisplay.textContent = val;
         });
+        
         this.tempInput.addEventListener('input', () => {
             let val = parseFloat(this.tempInput.value);
             if (isNaN(val)) return;

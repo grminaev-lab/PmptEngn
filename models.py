@@ -12,6 +12,7 @@ class Request(db.Model):
     max_tokens = db.Column(db.Integer, nullable=False)
     system_prompt = db.Column(db.Text)
     user_query = db.Column(db.Text, nullable=False)
+    message_history = db.Column(db.JSON, default=list)  # История сообщений
     
     # Связь с ответами
     responses = db.relationship('Response', backref='request', lazy=True, cascade='all, delete-orphan')
@@ -24,6 +25,7 @@ class Request(db.Model):
             'max_tokens': self.max_tokens,
             'system_prompt': self.system_prompt,
             'user_query': self.user_query,
+            'message_history': self.message_history,
             'responses': [r.to_dict() for r in self.responses]
         }
     
@@ -37,7 +39,8 @@ class Response(db.Model):
     resp_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     req_id = db.Column(db.Integer, db.ForeignKey('requests.request_id'), nullable=False)
     agent_name = db.Column(db.String(100), nullable=False)
-    resp_text = db.Column(db.Text)
+    resp_text = db.Column(db.Text)  # Только финальный текст для пользователя
+    raw_response = db.Column(db.Text)  # Полный JSON ответа для отладки
     status = db.Column(db.String(20), default='success')  # 'success' или 'error'
     error_message = db.Column(db.Text)
     
@@ -46,6 +49,7 @@ class Response(db.Model):
             'resp_id': self.resp_id,
             'agent_name': self.agent_name,
             'resp_text': self.resp_text,
+            'raw_response': self.raw_response,
             'status': self.status,
             'error_message': self.error_message
         }
