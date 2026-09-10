@@ -6,6 +6,7 @@ export class ResultsPage {
         this.resultsDisplay = document.getElementById('results-display');
         this.btnSaveJson = document.getElementById('btn-save-json');
         this.currentSessionId = null;
+        this.isInitialized = false;
 
         this.init();
     }
@@ -18,6 +19,7 @@ export class ResultsPage {
             this.sessionsSelect.selectedIndex = 0;
             await this.loadSession(this.sessionsSelect.value);
         }
+        this.isInitialized = true;
     }
 
     async loadSessions() {
@@ -30,8 +32,11 @@ export class ResultsPage {
                 opt.textContent = `${s.id}: ${s.date}/${s.time}`;
                 this.sessionsSelect.appendChild(opt);
             });
+            return sessions;
         } catch (err) {
             console.error('Ошибка загрузки сессий:', err);
+            this.sessionsSelect.innerHTML = '<option value="">Ошибка загрузки сессий</option>';
+            return [];
         }
     }
 
@@ -57,6 +62,39 @@ export class ResultsPage {
         }
     }
 
+    /**
+     * Синхронизация при переключении на вкладку:
+     * 1. Обновляем список сессий (могут появиться новые)
+     * 2. Сохраняем текущий выбор пользователя
+     * 3. Загружаем данные для выбранной сессии
+     */
+    async refresh() {
+        console.log('[ResultsPage] Refreshing...');
+        
+        // Сохраняем текущий выбор ДО обновления списка
+        const previousSelection = this.sessionsSelect.value;
+        
+        // Обновляем список сессий
+        const sessions = await this.loadSessions();
+        
+        if (sessions.length === 0) {
+            this.currentSessionId = null;
+            this.resultsDisplay.innerHTML = '<p>Нет сохранённых опросов</p>';
+            return;
+        }
+        
+        // Восстанавливаем выбор пользователя если он существует
+        if (previousSelection && sessions.find(s => s.id == previousSelection)) {
+            this.sessionsSelect.value = previousSelection;
+        } else {
+            // Иначе выбираем первую (последнюю) сессию
+            this.sessionsSelect.selectedIndex = 0;
+        }
+        
+        // Загружаем данные для выбранной сессии
+        await this.loadSession(this.sessionsSelect.value);
+    }
+
     renderResults(data) {
         // Параметры опроса
         const paramsHtml = `
@@ -78,7 +116,7 @@ export class ResultsPage {
                     <div>
                         <span class="agent-name">Agent: ${r.agentName}</span>
                         <span class="response-text ${isError ? 'error-text' : ''}">
-                            Response: ${r.text || r.error || '(пустой ответ)'}
+                            Response: ${r.text || '(пустой ответ)'}
                         </span>
                     </div>
                 `;
