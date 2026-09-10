@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agents Polling</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Навигация -->
+        <nav class="main-nav">
+            <button class="nav-btn active" data-tab="requests">Request Parameters</button>
+            <button class="nav-btn" data-tab="results">View Results</button>
+        </nav>
+
+        <!-- Вкладка: Параметры запроса -->
+        <section id="tab-requests" class="tab-content active">
+            <!-- Параметры -->
+            <div class="params-panel">
+                <div class="param-group">
+                    <label>Температура: <span id="temp-value">0.7</span></label>
+                    <input type="range" id="temperature" min="0" max="1" step="0.01" value="0.7">
+                    <input type="number" id="temperature-input" min="0" max="1" step="0.01" value="0.7">
+                </div>
+                <div class="param-group">
+                    <label>Макс. токенов:</label>
+                    <input type="number" id="max-tokens" value="2000">
+                </div>
+                <div class="param-group">
+                    <label>Системный промпт:</label>
+                    <textarea id="system-prompt" rows="3"></textarea>
+                </div>
+                <div class="param-group">
+                    <label>Текст запроса:</label>
+                    <textarea id="user-query" rows="5"></textarea>
+                </div>
+                <div class="action-buttons">
+                    <button id="btn-save-settings">Save settings</button>
+                    <button id="btn-start-requests" class="primary">Start requests</button>
+                </div>
+            </div>
+
+            <!-- Выбор агентов (Dual Listbox) -->
+            <div class="agents-panel">
+                <div class="listbox-container">
+                    <div class="listbox-wrapper">
+                        <h3>Доступные агенты</h3>
+                        <select id="source-agents" multiple size="6"></select>
+                    </div>
+                    <div class="listbox-controls">
+                        <button id="btn-move-right">&gt;</button>
+                        <button id="btn-move-all-right">&gt;&gt;</button>
+                        <button id="btn-move-left">&lt;</button>
+                        <button id="btn-move-all-left">&lt;&lt;</button>
+                    </div>
+                    <div class="listbox-wrapper">
+                        <h3>Выбранные агенты</h3>
+                        <select id="dest-agents" multiple size="6"></select>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Вкладка: Результаты -->
+        <section id="tab-results" class="tab-content">
+            <div class="results-controls">
+                <select id="sessions-list"></select>
+                <button id="btn-save-json">Save as json</button>
+            </div>
+            <div id="results-display">
+                <!-- Параметры опроса -->
+                <div class="result-params"></div>
+                <!-- Ответы агентов -->
+                <div class="result-responses"></div>
+            </div>
+        </section>
+    </div>
+
+    <script type="module" src="js/api.js"></script>
+    <script type="module" src="js/requests.js"></script>
+    <script type="module" src="js/results.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

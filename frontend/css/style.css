@@ -1,0 +1,83 @@
+/* ---------- Общие стили ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; color: #2d3748; }
+.app-container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+/* ---------- Навигация ---------- */
+.main-nav { display: flex; gap: 4px; background: #e2e8f0; border-radius: 12px; padding: 4px; margin-bottom: 24px; }
+.nav-btn { flex: 1; padding: 12px 24px; border: none; background: transparent; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.2s; color: #4a5568; }
+.nav-btn.active { background: white; color: #2b6cb0; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+.nav-btn:hover:not(.active) { background: rgba(255,255,255,0.5); }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* ---------- Параметры (grid-расположение) ---------- */
+.params-panel { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+    background: white; 
+    padding: 24px; 
+    border-radius: 12px; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    margin-bottom: 24px;
+}
+.param-group { display: flex; flex-direction: column; gap: 6px; }
+.param-group:has(textarea) { grid-column: 1 / -1; }
+.param-group label { font-weight: 600; font-size: 14px; color: #4a5568; }
+.param-group input[type="number"], 
+.param-group textarea { padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; transition: border-color 0.2s; }
+.param-group input[type="number"]:focus,
+.param-group textarea:focus { border-color: #4299e1; outline: none; box-shadow: 0 0 0 3px rgba(66,153,225,0.2); }
+.param-group textarea { resize: vertical; font-family: inherit; }
+
+/* Связка slider + input для температуры */
+.temp-row { display: flex; align-items: center; gap: 16px; }
+.temp-row input[type="range"] { flex: 1; }
+.temp-row input[type="number"] { width: 70px; }
+
+.action-buttons { grid-column: 1 / -1; display: flex; gap: 12px; justify-content: flex-end; padding-top: 8px; border-top: 1px solid #edf2f7; }
+.action-buttons button { padding: 10px 24px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.action-buttons button.primary { background: #4299e1; color: white; }
+.action-buttons button.primary:hover:not(:disabled) { background: #3182ce; }
+.action-buttons button.primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.action-buttons button:not(.primary) { background: #edf2f7; color: #4a5568; }
+.action-buttons button:not(.primary):hover { background: #e2e8f0; }
+
+/* ---------- Dual Listbox ---------- */
+.agents-panel { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.listbox-container { display: flex; align-items: center; justify-content: center; gap: 20px; }
+.listbox-wrapper { flex: 1; max-width: 300px; }
+.listbox-wrapper h3 { font-size: 14px; font-weight: 600; color: #4a5568; margin-bottom: 8px; text-align: center; }
+.listbox-wrapper select { width: 100%; height: 200px; padding: 8px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; background: white; }
+.listbox-wrapper select:focus { border-color: #4299e1; outline: none; box-shadow: 0 0 0 3px rgba(66,153,225,0.2); }
+.listbox-wrapper select option { padding: 6px 8px; border-radius: 4px; }
+.listbox-wrapper select option:hover { background: #ebf8ff; }
+.listbox-controls { display: flex; flex-direction: column; gap: 8px; }
+.listbox-controls button { width: 48px; padding: 6px 0; border: 1px solid #e2e8f0; background: white; border-radius: 6px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+.listbox-controls button:hover { background: #edf2f7; border-color: #cbd5e0; }
+
+/* ---------- Результаты ---------- */
+.results-controls { display: flex; gap: 16px; margin-bottom: 20px; align-items: center; flex-wrap: wrap; }
+.results-controls select { flex: 1; min-width: 250px; padding: 10px 14px; border: 1px solid #e2e8f0; border-radius: 8px; font-size: 14px; background: white; }
+.results-controls button { padding: 10px 24px; background: #48bb78; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.results-controls button:hover { background: #38a169; }
+
+#results-display { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.result-params { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid #edf2f7; }
+.result-params h4 { font-size: 14px; color: #718096; margin-bottom: 8px; }
+.result-params .param-grid { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; font-size: 14px; }
+.result-params .param-grid .label { color: #718096; font-weight: 500; }
+.result-responses { max-height: 400px; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 13px; white-space: pre-wrap; word-break: break-word; background: #f7fafc; padding: 16px; border-radius: 8px; border: 1px solid #edf2f7; line-height: 1.6; }
+.result-responses .agent-name { font-weight: 700; color: #2b6cb0; }
+.result-responses .response-text { display: block; margin-bottom: 12px; padding-left: 12px; border-left: 3px solid #bee3f8; }
+.result-responses .error-text { color: #e53e3e; }
+
+/* ---------- Адаптивность ---------- */
+@media (max-width: 768px) {
+    .params-panel { grid-template-columns: 1fr; }
+    .listbox-container { flex-direction: column; }
+    .listbox-wrapper { max-width: 100%; }
+    .listbox-controls { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+}
