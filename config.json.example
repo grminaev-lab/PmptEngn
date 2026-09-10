@@ -1,0 +1,36 @@
+{
+    "agents": [
+        {
+            "name": "Agent1 Alias for polling app",
+            "model_name": "yandex_model_name_for_agent1",
+            "agent_id": "agent1_yandex_id",
+            "vector_store_id": "yandex_vector_store_id"
+        },
+        {
+            "name": "Agent2 Alias for polling app",
+            "model_name": "yandex_model_name_for_agent2",
+            "agent_id": "agent2_yandex_id",
+            "vector_store_id": "yandex_vector_store_id"
+        },
+        {
+            "name": "Agent3 Alias for polling app",
+            "model_name": "yandex_model_name_for_agent3",
+            "agent_id": "agent3_yandex_id",
+            "vector_store_id": "yandex_vector_store_id"
+        },
+        {
+            "name": "Agent4 Alias for polling app",
+            "model_name": "yandex_model_name_for_agent4",
+            "agent_id": "agent4_yandex_id",
+            "vector_store_id": "yandex_vector_store_id"
+        }
+    ],
+    "defaults": {
+        "temperature": 0.25,
+        "maxTokens": 1259,
+        "systemPrompt": "Ты продавец косметики. Постарайся продать, что-нибудь из каталога. Ответ должен содержать : \n- приветствие\n- определение типа запроса (заказ, вопрос, жалоба)\n- автоматическое предложение решения\n- информацию о сроках ответа\nНе выдумывай ответ, проверь актуальную информацию. Если информации о товаре нет, сообщи об этом.\n",
+        "userQuery": "Мыло есть?"
+    },
+    "timeout": 30,
+    "vector_store_id": "yandex_vector_store_id"
+}
